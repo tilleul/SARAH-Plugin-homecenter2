@@ -1,0 +1,124 @@
+<grammar version="1.0" xml:lang="fr-FR" mode="voice" root="rulehomecenter2" xmlns="http://www.w3.org/2001/06/grammar" tag-format="semantics/1.0">
+  <rule id="rulehomecenter2" scope="public">
+    <example>Sarah allume la lumiere du salon</example>
+    <tag>out.action=new Object(); </tag>
+    <item weight="2">Sarah</item>
+    <one-of>
+      <item>allume<tag>out.action.value="true";out.action.request="set"</tag></item>
+      <item>eteint<tag>out.action.value="false";out.action.request="set"</tag></item>
+	  <item>ferme<tag>out.action.value="false";out.action.request="set"</tag></item>
+	  <item>ouvre<tag>out.action.value="true";out.action.request="set"</tag></item>
+	  <item>quelle<tag>out.action.value="false";out.action.request="get"</tag></item>
+	  <item>regle<tag>out.action.request="set"</tag></item>
+	  <item>baisse<tag>out.action.request="set"</tag></item>
+	  <item>augmente<tag>out.action.request="set"</tag></item>
+	  <item>passe en<tag>out.action.request="launch"</tag></item>
+	  <item>donne moi<tag>out.action.value="false";out.action.request="get"</tag></item>
+	  <item>met a jour le home center<tag>out.action.request="update"</tag></item>
+    </one-of>
+
+<!--  Modules § -->
+  <one-of>
+    <item>zwave<tag>out.action.module="zwave"</tag></item>
+    <item>admin<tag>out.action.module="admin"</tag></item>
+    <item>weather<tag>out.action.module="weather"</tag></item>
+    <item>Lumiere salon<tag>out.action.module="Lumiere salon"</tag></item>
+    <item>lamp wc<tag>out.action.module="lamp wc"</tag></item>
+    <item> 134.1<tag>out.action.module=" 134.1"</tag></item>
+    <item>lampe salle de bain<tag>out.action.module="lampe salle de bain"</tag></item>
+    <item>plafonier chambre<tag>out.action.module="plafonier chambre"</tag></item>
+    <item>VMC GV<tag>out.action.module="VMC GV"</tag></item>
+    <item> 141.1<tag>out.action.module=" 141.1"</tag></item>
+    <item>VMC PV<tag>out.action.module="VMC PV"</tag></item>
+    <item>undifined<tag>out.action.module="undifined"</tag></item>
+    <item> 145<tag>out.action.module=" 145"</tag></item>
+    <item>température chambre<tag>out.action.module="température chambre"</tag></item>
+    <item>Humid chambre<tag>out.action.module="Humid chambre"</tag></item>
+    <item>neon cuisine<tag>out.action.module="neon cuisine"</tag></item>
+    <item>lumiere entree<tag>out.action.module="lumiere entree"</tag></item>
+    <item>25<tag>out.action.module="25"</tag></item>
+    <item>température salle<tag>out.action.module="température salle"</tag></item>
+    <item>Humid SDB<tag>out.action.module="Humid SDB"</tag></item>
+    <item>lumiere cuisine<tag>out.action.module="lumiere cuisine"</tag></item>
+    <item>lumiere couloir<tag>out.action.module="lumiere couloir"</tag></item>
+    <item>29.1<tag>out.action.module="29.1"</tag></item>
+    <item>29.2<tag>out.action.module="29.2"</tag></item>
+    <item>32<tag>out.action.module="32"</tag></item>
+    <item>température salon<tag>out.action.module="température salon"</tag></item>
+    <item>Humidité salon<tag>out.action.module="Humidité salon"</tag></item>
+    <item>Radiateur<tag>out.action.module="Radiateur"</tag></item>
+    <item>iPad de Spere<tag>out.action.module="iPad de Spere"</tag></item>
+    <item>Controles<tag>out.action.module="Controles"</tag></item>
+    <item>porte entrée<tag>out.action.module="porte entrée"</tag></item>
+    <item>fenetre cuisine<tag>out.action.module="fenetre cuisine"</tag></item>
+    <item>fenêtre salon<tag>out.action.module="fenêtre salon"</tag></item>
+    <item>iPhone de Solene LECOMTEslK<tag>out.action.module="iPhone de Solene LECOMTEslK"</tag></item>
+    <item>Notifications<tag>out.action.module="Notifications"</tag></item>
+    <item>Radiateur chambre<tag>out.action.module="Radiateur chambre"</tag></item>
+    <item>54.1<tag>out.action.module="54.1"</tag></item>
+    <item>chauffage chambre<tag>out.action.module="chauffage chambre"</tag></item>
+    <item>radiateur salon<tag>out.action.module="radiateur salon"</tag></item>
+    <item>57.1<tag>out.action.module="57.1"</tag></item>
+    <item>Chauffage salon<tag>out.action.module="Chauffage salon"</tag></item>
+    <item>hotte V1<tag>out.action.module="hotte V1"</tag></item>
+    <item>60.1<tag>out.action.module="60.1"</tag></item>
+    <item>hotte v2<tag>out.action.module="hotte v2"</tag></item>
+    <item>volet<tag>out.action.module="volet"</tag></item>
+    <item>VMC<tag>out.action.module="VMC"</tag></item>
+    <item>byackee<tag>out.action.module="byackee"</tag></item>
+    <item>Speak<tag>out.action.module="Speak"</tag></item>
+    <item>Armoire technique<tag>out.action.module="Armoire technique"</tag></item>
+    <item>MiniMote_VF<tag>out.action.module="MiniMote_VF"</tag></item>
+    <item>télé<tag>out.action.module="télé"</tag></item>
+    <item>porte salle de bain<tag>out.action.module="porte salle de bain"</tag></item>
+    <item>PCHC<tag>out.action.module="PCHC"</tag></item>
+    <item>porte salon<tag>out.action.module="porte salon"</tag></item>
+    <item>74<tag>out.action.module="74"</tag></item>
+    <item>74.1<tag>out.action.module="74.1"</tag></item>
+    <item>74.2<tag>out.action.module="74.2"</tag></item>
+    <item>74.3<tag>out.action.module="74.3"</tag></item>
+    <item>lumiere hotte<tag>out.action.module="lumiere hotte"</tag></item>
+    <item>78.1<tag>out.action.module="78.1"</tag></item>
+    <item>78.2<tag>out.action.module="78.2"</tag></item>
+    <item>Nouveau module<tag>out.action.module="Nouveau module"</tag></item>
+    <item>Squeezebox<tag>out.action.module="Squeezebox"</tag></item>
+    <item>New Device<tag>out.action.module="New Device"</tag></item>
+    <item>light on<tag>out.action.module="light on"</tag></item>
+    <item>light off<tag>out.action.module="light off"</tag></item>
+    <item>Vmc GV<tag>out.action.module="Vmc GV"</tag></item>
+    <item>Vmc PV<tag>out.action.module="Vmc PV"</tag></item>
+    <item>Soleil<tag>out.action.module="Soleil"</tag></item>
+    <item>chauffage salon<tag>out.action.module="chauffage salon"</tag></item>
+    <item>Open_Close volet<tag>out.action.module="Open_Close volet"</tag></item>
+    <item>MiniMote<tag>out.action.module="MiniMote"</tag></item>
+    <item>Chauffage chambre<tag>out.action.module="Chauffage chambre"</tag></item>
+    <item>mode veille<tag>out.action.module="mode veille"</tag></item>
+    <item>porte<tag>out.action.module="porte"</tag></item>
+    <item>ouverture porte<tag>out.action.module="ouverture porte"</tag></item>
+    <item>hotte PV<tag>out.action.module="hotte PV"</tag></item>
+    <item>Hotte GV<tag>out.action.module="Hotte GV"</tag></item>
+    <item>Timer_lumiere<tag>out.action.module="Timer_lumiere"</tag></item>
+    <item>changeTemp<tag>out.action.module="changeTemp"</tag></item>
+    <item>simulateur aube<tag>out.action.module="simulateur aube"</tag></item>
+    <item>New Scene<tag>out.action.module="New Scene"</tag></item>
+  </one-of>
+<!-- § Modules -->
+
+	<item repeat="0-1" weight="1.2">
+	<one-of>
+		<item>dix pourcent<tag>out.action.value="10"</tag></item>
+		<item>vingt pourcent<tag>out.action.value="20"</tag></item>
+		<item>trente pourcent<tag>out.action.value="30"</tag></item>
+		<item>quarante pourcent<tag>out.action.value="40"</tag></item>
+		<item>cinquante pourcent<tag>out.action.value="50"</tag></item>
+		<item>soixante pourcent<tag>out.action.value="60"</tag></item>
+		<item>soixante dix pourcent<tag>out.action.value="70"</tag></item>
+		<item>quatre vingt pourcent<tag>out.action.value="80"</tag></item>
+		<item>quatre vingt dix pourcent<tag>out.action.value="90"</tag></item>
+		<item>cent pourcent<tag>out.action.value="100"</tag></item>
+    </one-of>
+	</item>
+	
+    <tag>out.action._attributes.uri="http://127.0.0.1:8080/sarah/homecenter2";</tag>
+  </rule>
+</grammar>

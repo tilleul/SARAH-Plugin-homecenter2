@@ -1,0 +1,11 @@
+{
+  "modules" : { 
+    "homecenter2":     {
+      "description": "Home Center 2",
+      "version"    : "1.01",
+	  "ip"		   : "192.168.1.1",
+	  "login"	   : "user",
+	  "password"   : "password"
+    }
+  }
+}
