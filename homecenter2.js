@@ -315,13 +315,8 @@ var output = function ( callback, output ) {
 var update = function(jsonrooms, json, data, callback, config){
 	console.log("***** UPDATE  *****");
 
-	if (!data.directory){ 
-	console.log('il n\'y a pas de dossier spécifié');
-	return false; 
-	}
-
 	var fs   = require('fs');
-	var file = data.directory + '/../plugins/homecenter2/homecenter2.xml';
+	var file = data.directory + 'plugins/homecenter2/homecenter2.xml';
 	var xml  = fs.readFileSync(file,'utf8');
   
 	var replace  = '§ -->\n';
@@ -358,7 +353,7 @@ var update = function(jsonrooms, json, data, callback, config){
 	fs.writeFileSync(file, xml, 'utf8');
 	fs.writeFileSync(file, xml, 'utf8');
 	
-	var file = data.directory + '/../plugins/homecenter2/portlet.html';
+	var file = data.directory + 'plugins/homecenter2/portlet.html';
 	var xml  = fs.readFileSync(file,'utf8');
   
 	var replace  = '§ -->\n';
