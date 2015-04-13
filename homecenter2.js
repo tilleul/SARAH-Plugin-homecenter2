@@ -135,7 +135,7 @@ var get = function (jsonrooms, json, data, callback, config) {
 
 			console.log ( "Found modules (" + i + ") " + module.name + ": " + found );
 			if ( found ) {
-				return say(module, callback);
+				return sayType(module, callback);
 			}
 		}
 		}
@@ -227,17 +227,17 @@ for ( var i = 0; i < jsonrooms.length; i++ ) {
 			
 var get_value = function ( module, value ) {
 	switch ( module.type ) {
-		case 'binary_light':
+		case 'com.fibaro.binarySwitch':
 			return (value == 'false'? 0: 1);
 			break;
-		case 'dimmable_light':
+		case 'com.fibaro.multilevelSwitch':
 		if ( value == 'true' || value == 'false') {
 		return (value == 'false'? 0: 99);
 		} else {
 			return value;
 			break;
 		}
-		case 'blind':
+		case 'com.fibaro.FGR221':
 		if ( value == 'true' || value == 'false') {
 		return (value == 'false'? 0: 99);
 		} else {
@@ -247,41 +247,54 @@ var get_value = function ( module, value ) {
 	}
 }
 
-var say = function ( module, callback ) {
+var sayType = function ( module, callback ) {
 	switch ( module.type ) {
-		case 'temperature_sensor':
+		case 'com.fibaro.temperatureSensor':
 			output (callback, 'la ' + module.name + ' est de ' + module.properties.value + get_unit(module));
 			break;
-		case 'binary_light':
+		case 'com.fibaro.binarySwitch':
 			var string = module.name + " est " + (module.properties.value == '0'? ' éteint': ' allumé');
 			if (module.properties.valueSensor && module.properties.valueSensor !="") 
 				string += ' et la consommation est de ' + returnString(module.properties.valueSensor,".",",") + get_unit(module);
 			output (callback, string);
 			break;
-		case 'dimmable_light':
+		case 'com.fibaro.multilevelSwitch':
 			output (callback, module.properties.value == '0'? 'c\'est éteint': 'c\'est allumé à ' + module.properties.value + 'pour cent');
 			break;
-		case 'humidity_sensor':
+		case 'com.fibaro.humiditySensor':
 			output (callback, 'le taux d\'humidité est de ' + module.properties.value + get_unit(module));
 			break;
-		case 'multi_level_sensor':
-			output (callback, 'la valeur de ' + module.name + ' est de ' + module.properties.value + get_unit(module));
-			break;
-		case 'door_sensor':
-			output (callback, module.name + (module.properties.value == '0'? ' est fermé': ' est ouvert '));
-			break;
-		case 'light_sensor':
+		case 'com.fibaro.lightSensor':
 			output (callback, 'la ' + module.name + ' est de ' + module.properties.value + get_unit(module));
 			break;
 		case 'virtual_device':
 			output (callback, 'test');
 			break;
-		case 'blind':
-			output (callback, module.name + (module.properties.value == '0'? ' est fermé': ' est ouvert '));
-			break;
-		case 'motion_sensor':
+		case 'com.fibaro.motionSensor':
 			output (callback, (module.properties.value == '0'? ' pas de mouvements sur ': ' detection présence sur') + module.name );
 			break;
+		case 'com.fibaro.seismometer':
+			output (callback, 'le valeur du ' + module.name + ' est de ' + module.properties.value + get_unit(module));
+			break;
+		default:
+		saybaseType(module, callback);
+	}
+}
+
+var saybaseType = function ( module, callback ) {
+	switch ( module.baseType ) {
+		case 'com.fibaro.doorWindowSensor':
+			output (callback, 'la ' + module.name + (module.properties.value == '0'? ' est fermé': ' est ouvert '));
+			break;
+		case 'com.fibaro.FGR221':
+			output (callback, module.name + (module.properties.value == '0'? ' est fermé': ' est ouvert '));
+			break;
+		case 'com.fibaro.smokeSensor':
+			output (callback, module.name + (module.properties.value == '0'? ' est fermé': ' est ouvert '));
+			break;	
+		case 'com.fibaro.floodSensor':
+			output (callback, module.name + (module.properties.value == '0'? ' est fermé': ' est ouvert '));
+			break;	
 		default:
 		output(callback, "Je ne peux pas exécuter cette action");
 	}
@@ -300,7 +313,7 @@ unit = module.properties.unitSensor
 			return ' degrés';
 		case 'F':
 			return ' degrés';
-		case 'Lux':
+		case 'Lx':
 			return ' Lux';
 		default:
 			return ' ';
