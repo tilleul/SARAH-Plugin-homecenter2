@@ -1,3 +1,5 @@
+// Beta version for prepare V4 of HC2
+
 exports.init = function (SARAH){
   status(SARAH.ConfigManager.getConfig());
 }
