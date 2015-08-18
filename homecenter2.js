@@ -30,6 +30,7 @@ var config = config.modules.homecenter2;
 }
 
 var get_rooms = function ( action, data, callback, config ) {
+	console.log("GET_ROOMS");
 	var http = require('http');
 	var options = {
 	  hostname: config.ip,
@@ -57,6 +58,7 @@ var get_rooms = function ( action, data, callback, config ) {
 }
 
 var get_modules = function ( jsonrooms, action, data, callback, config ) {
+	console.log("GET_MODULES");
 	var http = require('http');
 	var options = {
 	  hostname: config.ip,
@@ -180,9 +182,10 @@ for ( var i = 0; i < jsonrooms.length; i++ ) {
 					var options = {
 					hostname: config.ip,
 					port: 80,
-					path: '/api/callAction?deviceID='+module.id+"&name=setValue&arg1="+get_value(module,value),
+					path: '/api/callAction?deviceID='+module.id+"&name="+get_value(module,value),
 					auth: config.login + ':' + config.password
 					};
+					console.log (options.path);
 				} else {
 				console.log('run scene');
 					var http = require('http');
@@ -228,20 +231,21 @@ for ( var i = 0; i < jsonrooms.length; i++ ) {
 var get_value = function ( module, value ) {
 	switch ( module.type ) {
 		case 'com.fibaro.binarySwitch':
-			return (value == 'false'? 0: 1);
+		case 'com.fibaro.FGWP101':
+			return (value == 'false'? "turnOff": "turnOn");
 			break;
 		case 'com.fibaro.multilevelSwitch':
 		if ( value == 'true' || value == 'false') {
-		return (value == 'false'? 0: 99);
+			return 'setValue&arg1=' + (value == 'false'? 0: 99);
 		} else {
-			return value;
+			return 'setValue&arg1=' + value;
 			break;
 		}
 		case 'com.fibaro.FGR221':
 		if ( value == 'true' || value == 'false') {
-		return (value == 'false'? 0: 99);
+			return 'setValue&arg1=' + (value == 'false'? 0: 99);
 		} else {
-			return value;
+			return 'setValue&arg1=' + value;
 			break;
 		}
 	}
@@ -253,7 +257,8 @@ var sayType = function ( module, callback ) {
 			output (callback, 'la ' + module.name + ' est de ' + module.properties.value + get_unit(module));
 			break;
 		case 'com.fibaro.binarySwitch':
-			var string = module.name + " est " + (module.properties.value == '0'? ' éteint': ' allumé');
+		case 'com.fibaro.FGWP101':
+			var string = module.name + " est " + (module.properties.value == 'false'? ' éteint': ' allumé');
 			if (module.properties.valueSensor && module.properties.valueSensor !="") 
 				string += ' et la consommation est de ' + returnString(module.properties.valueSensor,".",",") + get_unit(module);
 			output (callback, string);
@@ -329,7 +334,7 @@ var update = function(jsonrooms, json, data, callback, config){
 	console.log("***** UPDATE  *****");
 
 	var fs   = require('fs');
-	var file = data.directory + 'plugins/homecenter2/homecenter2.xml';
+	var file = __dirname + '/homecenter2.xml';
 	var xml  = fs.readFileSync(file,'utf8');
   
 	var replace  = '§ -->\n';
@@ -366,7 +371,7 @@ var update = function(jsonrooms, json, data, callback, config){
 	fs.writeFileSync(file, xml, 'utf8');
 	fs.writeFileSync(file, xml, 'utf8');
 	
-	var file = data.directory + 'plugins/homecenter2/portlet.html';
+	var file = __dirname + '/portlet.html';
 	var xml  = fs.readFileSync(file,'utf8');
   
 	var replace  = '§ -->\n';
