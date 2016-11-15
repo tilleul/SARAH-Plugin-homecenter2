@@ -124,7 +124,7 @@ var get = function (jsonrooms, json, data, callback, config) {
 			found = new RegExp(tokens[j],'i').test(text2);
 		}
 
-		console.log ( "Found rooms (" + i + ") " + rooms.name + ": " + found );
+		console.log ( "GET - Found room (ID: " + rooms.id + ") " + rooms.name + ": " + found );
 		if ( found ) {
 			for ( var i = 0; i < json.length; i++ ) {
 				var module = json[i];
@@ -135,7 +135,7 @@ var get = function (jsonrooms, json, data, callback, config) {
 					found = new RegExp(tokens[j],'i').test(text);
 				}
 
-			console.log ( "Found modules (" + i + ") " + module.name + ": " + found );
+			console.log ( "GET - Found module (ID: " + module.id + ") " + module.name + ": " + found );
 			if ( found ) {
 				return sayType(module, callback);
 			}
@@ -163,7 +163,7 @@ for ( var i = 0; i < jsonrooms.length; i++ ) {
 			found = new RegExp(tokens[j],'i').test(text2);
 		}
 
-		console.log ( "Found rooms (" + i + ") " + rooms.name + ": " + found );
+		console.log ( "SET - Found room (ID: " + rooms.id + ") " + rooms.name + ": " + found );
 		if ( found ) {	
 			for ( var i = 0; i < json.length; i++ ) {
 				var module = json[i];
@@ -174,10 +174,10 @@ for ( var i = 0; i < jsonrooms.length; i++ ) {
 					found = new RegExp(tokens[j],'i').test(text);
 				}
 
-			console.log ( "Found (" + i + ") " + module.name + ": " + found );
+			console.log ( "SET - Found (ID: " + module.id + ") " + module.name + ": " + found );
 			if ( found ) {
 				if ( data.request == "set") {
-						console.log('module action');
+					console.log('module action');
 					var http = require('http');
 					var options = {
 					hostname: config.ip,
@@ -229,6 +229,7 @@ for ( var i = 0; i < jsonrooms.length; i++ ) {
 }
 			
 var get_value = function ( module, value ) {
+	console.log("get_value() TYPE: " + module.type);
 	switch ( module.type ) {
 		case 'com.fibaro.binarySwitch':
 		case 'com.fibaro.FGWP101':
@@ -252,6 +253,7 @@ var get_value = function ( module, value ) {
 }
 
 var sayType = function ( module, callback ) {
+	console.log("sayType() TYPE: " + module.type);
 	switch ( module.type ) {
 		case 'com.fibaro.temperatureSensor':
 			output (callback, 'la ' + module.name + ' est de ' + module.properties.value + get_unit(module));
@@ -287,6 +289,7 @@ var sayType = function ( module, callback ) {
 }
 
 var saybaseType = function ( module, callback ) {
+	console.log("saybaseType() TYPE: " + module.baseType);
 	switch ( module.baseType ) {
 		case 'com.fibaro.doorWindowSensor':
 			output (callback, 'la ' + module.name + (module.properties.value == '0'? ' est fermé': ' est ouvert '));
