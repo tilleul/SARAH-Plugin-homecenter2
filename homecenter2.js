@@ -243,6 +243,7 @@ var get_value = function ( module, value ) {
 			break;
 		}
 		case 'com.fibaro.FGR221':
+		case 'com.fibaro.FGRM222":
 		if ( value == 'true' || value == 'false') {
 			return 'setValue&arg1=' + (value == 'false'? 0: 99);
 		} else {
